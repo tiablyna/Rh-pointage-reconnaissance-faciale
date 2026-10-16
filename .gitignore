@@ -1,0 +1,28 @@
+# Dépendances
+node_modules/
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Variables d'environnement (jamais commiter les vraies valeurs)
+.env
+.env.local
+
+# Builds
+build/
+dist/
+
+# Uploads utilisateurs (contenu généré à l'exécution)
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Poids de modèles ML (trop volumineux pour Git)
+*.pth
+*.onnx
+*.h5
+*.pt
+
+# Divers
+.DS_Store
+*.log

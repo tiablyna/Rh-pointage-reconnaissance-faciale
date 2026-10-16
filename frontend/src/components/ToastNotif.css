@@ -1,0 +1,53 @@
+/* components/ToastNotif.css */
+.toast-notif {
+    position: fixed;
+    top: 32px;
+    right: 32px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: white;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    min-width: 320px;
+    max-width: 480px;
+    animation: toast-entree 0.3s ease;
+}
+
+@keyframes toast-entree {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.toast-icone {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.toast-message {
+    flex: 1;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: #222;
+    line-height: 1.4;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    color: #aaa;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.toast-close:hover { color: #555; }
