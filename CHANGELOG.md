@@ -2,12 +2,13 @@
 
 Toutes les versions notables de ce projet sont documentées ici.
 
+
 ## [v1.0] — Socle RH de base
 - API Express + MongoDB : employés, postes, structures, horaires.
 - CRUD complet des employés (création, modification, suppression, recherche, filtrage par département).
 - Import en masse d'employés (fichier Excel + archive ZIP de photos).
 - Frontend React : liste des employés, fiche détail, création, modification, import en masse.
-- ⚠️ Pas encore d'authentification (ajoutée en v1.1).
+-  Pas encore d'authentification (ajoutée en v1.1).
 
 ## À venir
 - **v1.1** — Authentification JWT (login, rôles admin/employé).

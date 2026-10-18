@@ -39,6 +39,7 @@ app.use("/api/postes", require("./routes/Posteroutes"));
 app.use("/api/departements", require("./routes/structureRoutes"));
 app.use("/api/structures", require("./routes/structureRoutes"));
 app.use("/api/horaires", require("./routes/Horaireroutes"));
+app.use("/api/auth", require("./routes/authRoutes"));
 
 // ─── Route de test ───────────────────────────────────────
 app.get("/", (req, res) =>

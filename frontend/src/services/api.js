@@ -9,6 +9,16 @@ API.interceptors.request.use((config) => {
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
+
+
+// ─── AUTH ───────────────────────────────────────────────────────────────────
+export const serviceAuth = {
+  login: (email, password) => API.post("/auth/login", { email, password }),
+};
+
+
+
+
 // ─── DEMANDES ─────────────────────────────────────────────────────────────────
 export const serviceDemandes = {
   // Absences
