@@ -34,14 +34,17 @@ npm install
 npm start
 ```
 
-## État actuel : v1.0
-Le socle RH est en place : gestion complète des employés (CRUD + import en masse via
-Excel/ZIP), postes, structures et horaires. L'authentification, le pointage par
-reconnaissance faciale et les modules RH complémentaires arrivent dans les versions
-suivantes.
+## État actuel : v1.2
+Le socle RH (CRUD employés + import en masse), l'authentification JWT, et le service de
+reconnaissance faciale (MTCNN + ArcFace) sont en place et fonctionnels indépendamment.
+La v1.3 reliera le tout : capture webcam côté frontend → reconnaissance → pointage
+affiché en direct, avec un mode "employé de test" pour permettre à un recruteur
+d'essayer sans vraie donnée d'employé.
 
-### Points connus (v1.0)
-- L'authentification (`authMiddleware`) est un passthrough temporaire — aucune route
-  n'est protégée pour l'instant. Remplacée par un vrai contrôle JWT en v1.1.
+### Points connus
+- Pas encore de distinction de droits par rôle (admin vs employé) — tout compte
+  authentifié a accès à tout. Pourra être ajouté si besoin avec les modules RH (v1.4+).
 - Le thème (`/api/apparence/settings`) n'est pas encore implémenté : erreur 404
   silencieuse en console, sans impact (couleur par défaut appliquée).
+- Le service `pointagepython` n'est pas encore appelé par le frontend (prévu en v1.3) ;
+  pour l'instant testable uniquement en direct via `curl`/Postman.
