@@ -16,7 +16,20 @@ export const serviceAuth = {
   login: (email, password) => API.post("/auth/login", { email, password }),
 };
 
+// ─── DÉMO PUBLIQUE (pointage) ─────────────────────────────────────────────
+export const serviceDemoPointage = {
+  creerEmployeTest: (formData) =>
+    API.post("/demo/employe-test", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    }),
+  enregistrerEmbeddings: (employeId, encodages) =>
+    API.patch(`/demo/employe-test/${employeId}/embeddings`, { encodages }),
+};
 
+// ─── POINTAGES (liste récente — v1.3) ──────────────────────────────────────
+export const servicePointagesRecents = {
+  obtenirRecents: (limit = 20) => API.get("/pointages", { params: { limit } }),
+};
 
 
 // ─── DEMANDES ─────────────────────────────────────────────────────────────────

@@ -40,7 +40,8 @@ app.use("/api/departements", require("./routes/structureRoutes"));
 app.use("/api/structures", require("./routes/structureRoutes"));
 app.use("/api/horaires", require("./routes/Horaireroutes"));
 app.use("/api/auth", require("./routes/authRoutes"));
-
+app.use("/api/pointages", require("./routes/pointageRoutes"));
+app.use("/api/demo", require("./routes/demoRoutes"));
 // ─── Route de test ───────────────────────────────────────
 app.get("/", (req, res) =>
   res.json({ message: "✅ API RH opérationnelle (v1.0)" }),

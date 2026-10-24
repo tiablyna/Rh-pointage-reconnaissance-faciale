@@ -34,17 +34,18 @@ npm install
 npm start
 ```
 
-## État actuel : v1.2
-Le socle RH (CRUD employés + import en masse), l'authentification JWT, et le service de
-reconnaissance faciale (MTCNN + ArcFace) sont en place et fonctionnels indépendamment.
-La v1.3 reliera le tout : capture webcam côté frontend → reconnaissance → pointage
-affiché en direct, avec un mode "employé de test" pour permettre à un recruteur
-d'essayer sans vraie donnée d'employé.
+
+## État actuel : v1.3
+Le cœur du projet est fonctionnel de bout en bout : gestion des employés (CRUD + import
+en masse), authentification JWT, et pointage par reconnaissance faciale testable en
+direct via la webcam — y compris par un visiteur sans compte, via `/demo-pointage`.
 
 ### Points connus
-- Pas encore de distinction de droits par rôle (admin vs employé) — tout compte
-  authentifié a accès à tout. Pourra être ajouté si besoin avec les modules RH (v1.4+).
-- Le thème (`/api/apparence/settings`) n'est pas encore implémenté : erreur 404
-  silencieuse en console, sans impact (couleur par défaut appliquée).
-- Le service `pointagepython` n'est pas encore appelé par le frontend (prévu en v1.3) ;
-  pour l'instant testable uniquement en direct via `curl`/Postman.
+- Pas encore de distinction de droits par rôle (admin vs employé).
+- Le thème (`/api/apparence/settings`) n'est pas encore implémenté : 404 silencieuse en
+  console, sans impact (couleur par défaut appliquée).
+- La liste des pointages (`/api/pointages`) est volontairement simple pour l'instant —
+  pas encore de calcul de retard/assiduité (prévu en v1.4+, avec les modules Horaire,
+  Congés et Absences).
+- Les comptes créés via `/demo-pointage` (`est_test: true`) s'accumulent en base sans
+  nettoyage automatique — à surveiller si la démo est beaucoup utilisée.*

@@ -2,6 +2,13 @@
 
 Toutes les versions notables de ce projet sont documentées ici.
 
+## [v1.3] — Pointage en direct + démo publique
+- Intégration webcam côté frontend : capture de photos via `getUserMedia`, sans dépendance externe.
+- Page publique `/demo-pointage` (sans authentification) : un visiteur peut s'inscrire avec sa webcam (3 photos → empreintes ArcFace) puis tester le pointage par reconnaissance faciale en direct.
+- Nouveau flux "employé de test" (`est_test: true`) côté backend, isolé des vrais employés : poste/structure "Démo" créés automatiquement, endpoint public dédié protégé par ce flag.
+- Liste des derniers pointages (`GET /api/pointages`) — version simple ; le calcul de retard/assiduité (lié aux modules Horaire par équipes, Congés, Absences, Jours fériés) est réservé à la v1.4+.
+- Le frontend attend que le service Python ait fini de charger son modèle (`GET /health`) avant d'activer la webcam, avec un message explicite plutôt qu'un échec silencieux.
+
 ## [v1.2] — Service de reconnaissance faciale
 - Nouveau service Python (`pointagepython/`), API Flask autonome.
 - Pipeline MTCNN (détection de visage) + ArcFace (empreinte biométrique à 512 dimensions) + comparaison par distance cosinus (seuil 0.50).
@@ -16,15 +23,11 @@ Toutes les versions notables de ce projet sont documentées ici.
 - Frontend : page de connexion (`Login.jsx`), routes protégées côté client (`PrivateRoute`), déconnexion.
 - Pas encore de distinction de droits par rôle (admin vs employé) — tout compte authentifié a accès à tout.
 
-
 ## [v1.0] — Socle RH de base
 - API Express + MongoDB : employés, postes, structures, horaires.
 - CRUD complet des employés (création, modification, suppression, recherche, filtrage par département).
 - Import en masse d'employés (fichier Excel + archive ZIP de photos).
 - Frontend React : liste des employés, fiche détail, création, modification, import en masse.
--  Pas encore d'authentification (ajoutée en v1.1).
 
 ## À venir
-
-- **v1.3** — Pointage en direct via webcam depuis le frontend, avec ajout d'un employé de test pour la démo.
 - **v1.4 → v2.0** — Modules RH complémentaires : congés, absences, heures supplémentaires, jours fériés, horaires par équipes, notifications, tableau de bord d'assiduité.

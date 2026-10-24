@@ -137,6 +137,12 @@ function Login() {
         <button type="submit" disabled={chargement}>
           {chargement ? "Connexion..." : "Se connecter"}
         </button>
+        <p style={{ marginTop: 16, fontSize: 14 }}>
+          Pas de compte ?{" "}
+          <a href="/demo-pointage" style={{ color: "#4263eb", fontWeight: 600 }}>
+            Essayer la démo de pointage par webcam
+          </a>
+        </p>
       </form>
     </div>
   );

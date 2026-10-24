@@ -35,7 +35,8 @@ const EmployeSchema = new mongoose.Schema({
   horaire: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Horaire"
-  }
+  },
+  est_test: { type: Boolean, default: false }
 }, { timestamps: true });
 
 module.exports = mongoose.model("Employe", EmployeSchema);
