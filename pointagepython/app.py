@@ -2,7 +2,7 @@
 #
 # v1.2 — Service de reconnaissance faciale, exposé en API web (Flask) plutôt
 # qu'en script lié à des caméras physiques (contrairement au script original
-#  pensé pour tourner en continu sur deux flux vidéo
+# 08_pointage_2cameras.py, pensé pour tourner en continu sur deux flux vidéo
 # avec affichage OpenCV local). Ici, le frontend envoie une photo capturée
 # via la webcam du navigateur ; le service répond avec le résultat.
 #
@@ -33,7 +33,16 @@ load_dotenv()
 MONGODB_URI = os.environ["MONGODB_URI"]
 SEUIL_DISTANCE = float(os.environ.get("SEUIL_DISTANCE", 0.50))
 DELAI_POINTAGE = int(os.environ.get("DELAI_POINTAGE", 300))  # secondes anti-doublon
-DETECTOR = "mtcnn"
+
+# Détecteur de visage : MTCNN par défaut (plus précis, utilisé en local).
+# En hébergement gratuit à mémoire limitée (ex. Render free tier, 512 Mo),
+# MTCNN charge un réseau de neurones supplémentaire rien que pour la
+# détection, ce qui fait dépasser la limite de RAM. On peut donc basculer
+# sur "opencv" (détection classique, sans réseau de neurones, bien plus
+# légère) via la variable d'environnement FACE_DETECTOR — ArcFace, qui fait
+# le vrai travail de reconnaissance biométrique, reste inchangé dans tous
+# les cas.
+DETECTOR = os.environ.get("FACE_DETECTOR", "mtcnn")
 MODEL_NAME = "ArcFace"
 
 app = Flask(__name__)
