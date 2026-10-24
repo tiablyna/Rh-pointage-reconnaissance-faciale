@@ -16,9 +16,13 @@
 
 import os
 import warnings
-os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 warnings.filterwarnings("ignore")
+
+# Force DeepFace à utiliser le backend ONNX (onnxruntime) plutôt que
+# TensorFlow : même modèle ArcFace, mais ~600 Mo de RAM en moins au
+# chargement — indispensable pour tenir dans les 512 Mo du free tier Render.
+# Voir pointagepython/README.md pour le détail de ce choix.
+os.environ["DEEPFACE_BACKEND_ENGINE"] = "onnx"
 
 from datetime import datetime, timezone
 
@@ -34,15 +38,14 @@ MONGODB_URI = os.environ["MONGODB_URI"]
 SEUIL_DISTANCE = float(os.environ.get("SEUIL_DISTANCE", 0.50))
 DELAI_POINTAGE = int(os.environ.get("DELAI_POINTAGE", 300))  # secondes anti-doublon
 
-# Détecteur de visage : MTCNN par défaut (plus précis, utilisé en local).
-# En hébergement gratuit à mémoire limitée (ex. Render free tier, 512 Mo),
-# MTCNN charge un réseau de neurones supplémentaire rien que pour la
-# détection, ce qui fait dépasser la limite de RAM. On peut donc basculer
-# sur "opencv" (détection classique, sans réseau de neurones, bien plus
-# légère) via la variable d'environnement FACE_DETECTOR — ArcFace, qui fait
-# le vrai travail de reconnaissance biométrique, reste inchangé dans tous
-# les cas.
-DETECTOR = os.environ.get("FACE_DETECTOR", "mtcnn")
+# Détecteur de visage : "opencv" par défaut (classique, sans réseau de
+# neurones dédié, très léger en mémoire — essentiel pour tenir sur un
+# hébergement gratuit à 512 Mo de RAM). MTCNN (plus précis, mais qui exige
+# TensorFlow et ses ~600 Mo rien que pour la détection) reste utilisable en
+# le réglant via la variable d'environnement FACE_DETECTOR=mtcnn, à
+# condition d'installer `tensorflow` et `mtcnn` en plus localement —
+# non recommandé une fois déployé sur le free tier.
+DETECTOR = os.environ.get("FACE_DETECTOR", "opencv")
 MODEL_NAME = "ArcFace"
 
 app = Flask(__name__)
