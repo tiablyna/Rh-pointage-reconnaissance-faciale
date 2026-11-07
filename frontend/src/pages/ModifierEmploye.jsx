@@ -5,6 +5,7 @@ import Sidebar from "../components/Sidebar";
 import { serviceEmployes, serviceStructures, servicePostes, serviceHoraires } from "../services/api";
 import { FaArrowLeft, FaCamera, FaTimes, FaCheck, FaEye, FaEyeSlash, FaTrash } from "react-icons/fa";
 import ToastNotif from "../components/ToastNotif";
+import PhotoAvecSecours from "../components/PhotoAvecSecours";
 
 function construireUrl(chemin) {
   if (!chemin) return null;
@@ -403,12 +404,16 @@ export default function ModifierEmploye() {
                 const aSupprimer = photosASupprime.includes(chemin);
                 return (
                   <div key={i} style={{ position: "relative", cursor: "pointer" }} onClick={() => toggleSupprimerPhoto(chemin)}>
-                    <img src={construireUrl(chemin)} alt="" style={{ 
-                      width: 80, height: 80, borderRadius: 12, objectFit: "cover", 
-                      border: aSupprimer ? "3px solid #e03131" : "2px solid #e4e6ea", 
-                      opacity: aSupprimer ? 0.5 : 1, 
-                      transition: "0.2s" 
-                    }} />
+                    <PhotoAvecSecours
+                      src={construireUrl(chemin)}
+                      style={{ 
+                        width: 80, height: 80, borderRadius: 12, objectFit: "cover",
+                        border: aSupprimer ? "3px solid #e03131" : "2px solid #e4e6ea",
+                        opacity: aSupprimer ? 0.5 : 1,
+                        transition: "0.2s"
+                      }}
+                    />
+                    
                     {aSupprimer && (
                       <div style={{ position: "absolute", inset: 0, background: "#e0313133", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <FaTrash color="#e03131" size={20} />

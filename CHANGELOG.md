@@ -2,6 +2,11 @@
 
 Toutes les versions notables de ce projet sont documentées ici.
 
+## [v1.3.1] — Correctifs de mise en production
+- Nouveau composant `PhotoAvecSecours` : affiche un placeholder neutre à la place de l'icône d'image cassée quand une photo d'employé ne charge pas (miniatures de la fiche détail, photos existantes en modification). Contexte : le disque de l'hébergeur gratuit est éphémère, les photos uploadées en ligne disparaissent à chaque redéploiement ou redémarrage.
+- Service de reconnaissance faciale allégé : l'inférence ArcFace passe par ONNX Runtime au lieu de TensorFlow, et la détection de visage utilise OpenCV par défaut (au lieu de MTCNN). Même modèle ArcFace, mais un pic mémoire mesuré d'environ 380 Mo, contre un dépassement des 512 Mo du plan gratuit de Render avec TensorFlow.
+- Détecteur de visage configurable via la variable d'environnement `FACE_DETECTOR`.
+
 ## [v1.3] — Pointage en direct + démo publique
 - Intégration webcam côté frontend : capture de photos via `getUserMedia`, sans dépendance externe.
 - Page publique `/demo-pointage` (sans authentification) : un visiteur peut s'inscrire avec sa webcam (3 photos → empreintes ArcFace) puis tester le pointage par reconnaissance faciale en direct.
@@ -30,4 +35,6 @@ Toutes les versions notables de ce projet sont documentées ici.
 - Frontend React : liste des employés, fiche détail, création, modification, import en masse.
 
 ## À venir
-- **v1.4 → v2.0** — Modules RH complémentaires : congés, absences, heures supplémentaires, jours fériés, horaires par équipes, notifications, tableau de bord d'assiduité.
+- **v1.4** — Tableau de bord admin et tableau d'assiduité.
+- **v1.5 → v2.0** — Modules RH complémentaires : congés, absences, heures supplémentaires, jours fériés, horaires par équipes, notifications.
+- **Stockage persistant des photos** (Cloudinary), avant l'ajout des employés de démonstration.

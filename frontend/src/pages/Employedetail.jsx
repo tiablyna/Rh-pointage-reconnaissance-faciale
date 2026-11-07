@@ -16,6 +16,7 @@ import { FaArrowsRotate } from "react-icons/fa6";
 
 import PlanningCalendrier from "../components/PlanningCalendrier";
 import { useTheme } from "../context/ThemeContext";
+import PhotoAvecSecours from "../components/PhotoAvecSecours";
 // ─────────────────────────────────────────────────────────────────────────────
 function construireUrl(chemin) {
   if (!chemin) return null;
@@ -398,10 +399,9 @@ export default function EmployeDetail() {
             {employe.photo?.length > 1 && (
               <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
                 {employe.photo.map((p, i) => (
-                  <img
+                  <PhotoAvecSecours
                     key={i}
                     src={construireUrl(p)}
-                    alt=""
                     onClick={() => { setPhotoActive(i); setPhotoErr(false); }}
                     style={{
                       width: 32, height: 32, borderRadius: 6, objectFit: "cover", cursor: "pointer",
