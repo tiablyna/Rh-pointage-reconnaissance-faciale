@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { getPointagesRecents } = require("../controllers/pointageController");
+const { getPointagesRecents, getAssiduite } = require("../controllers/pointageController");
 const { verifyToken } = require("../middleware/authMiddleware");
 
-// GET http://localhost:5000/api/pointages?limit=20
 router.get("/", verifyToken, getPointagesRecents);
+
+router.get("/assiduite", verifyToken, getAssiduite);
 
 module.exports = router;

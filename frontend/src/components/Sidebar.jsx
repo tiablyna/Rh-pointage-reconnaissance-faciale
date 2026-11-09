@@ -2,7 +2,7 @@
 import "./Sidebar.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { FaSignOutAlt, FaCog, FaBars, FaTimes, FaUsers } from "react-icons/fa";
+import { FaSignOutAlt, FaCog, FaBars, FaTimes, FaUsers, FaCalendarAlt, FaChartLine } from "react-icons/fa";
 
 function construireUrl(chemin) {
   if (!chemin) return null;
@@ -38,11 +38,19 @@ export default function Sidebar({ active }) {
   // Dashboard, Demandes, Pointage, Organigramme et Calendrier reviendront
   // au fil des versions suivantes (voir CHANGELOG.md).
   const menuItems = [
-    {
-      label: "Employés", icon: <FaUsers />, path: "/employes",
-      actif: location.pathname === "/employes" || location.pathname.startsWith("/employes/"),
-    },
-  ];
+  {
+    label: "Dashboard", icon: <FaChartLine />, path: "/dashboard",
+    actif: location.pathname === "/dashboard",
+  },
+  {
+    label: "Employés", icon: <FaUsers />, path: "/employes",
+    actif: location.pathname === "/employes" || location.pathname.startsWith("/employes/"),
+  },
+  {
+    label: "Assiduité", icon: <FaCalendarAlt />, path: "/assiduite",
+    actif: location.pathname === "/assiduite",
+  },
+];
 
   return (
     <>

@@ -2,6 +2,13 @@
 
 Toutes les versions notables de ce projet sont documentées ici.
 
+## [v1.4] — Tableau de bord admin et assiduité
+- Tableau de bord (`/dashboard`) : nombre d'employés, présents aujourd'hui, en retard aujourd'hui, nouveaux employés du mois, et les 10 derniers pointages.
+- Tableau d'assiduité mensuel (`/assiduite`) : par employé, jours présents, jours absents, retards et taux d'assiduité, avec sélecteur de mois et d'année. Un retard est un pointage d'entrée après l'heure de début de l'horaire de l'employé plus la tolérance ; sans horaire assigné, aucun retard n'est calculé.
+- Nouvelles routes protégées par JWT : `GET /api/dashboard/stats` et `GET /api/pointages/assiduite`.
+- Les comptes de démo (`est_test`) sont exclus des statistiques et de l'assiduité ; ils restent visibles, avec un badge « test », dans la liste des derniers pointages.
+- Limite connue : les jours ouvrés sont estimés (jours de semaine du mois). Les jours fériés et les congés/absences ne sont pas encore pris en compte, un employé en congé apparaît donc comme absent. À corriger avec les modules Congés, Absences et Jours fériés.
+
 ## [v1.3.1] — Correctifs de mise en production
 - Nouveau composant `PhotoAvecSecours` : affiche un placeholder neutre à la place de l'icône d'image cassée quand une photo d'employé ne charge pas (miniatures de la fiche détail, photos existantes en modification). Contexte : le disque de l'hébergeur gratuit est éphémère, les photos uploadées en ligne disparaissent à chaque redéploiement ou redémarrage.
 - Service de reconnaissance faciale allégé : l'inférence ArcFace passe par ONNX Runtime au lieu de TensorFlow, et la détection de visage utilise OpenCV par défaut (au lieu de MTCNN). Même modèle ArcFace, mais un pic mémoire mesuré d'environ 380 Mo, contre un dépassement des 512 Mo du plan gratuit de Render avec TensorFlow.
@@ -35,6 +42,5 @@ Toutes les versions notables de ce projet sont documentées ici.
 - Frontend React : liste des employés, fiche détail, création, modification, import en masse.
 
 ## À venir
-- **v1.4** — Tableau de bord admin et tableau d'assiduité.
 - **v1.5 → v2.0** — Modules RH complémentaires : congés, absences, heures supplémentaires, jours fériés, horaires par équipes, notifications.
 - **Stockage persistant des photos** (Cloudinary), avant l'ajout des employés de démonstration.

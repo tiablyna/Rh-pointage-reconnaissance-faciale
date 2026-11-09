@@ -1,0 +1,58 @@
+/* pages/PointagePage.css — règles reprises du projet d'origine (mise en page des pages Pointage / Assiduité). */
+
+
+.page-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f6fa;
+}
+
+.page-main {
+  flex: 1;
+  padding: 32px 36px;
+  overflow-y: auto;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.page-titre {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0 0 4px 0;
+}
+
+.page-titre-bar {
+  display: inline-block;
+  width: 5px;
+  height: 32px;
+  background: var(--couleur-principale, #ff5c00);
+  border-radius: 3px;
+}
+
+.page-sous-titre {
+  color: #888;
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+.page-date {
+  font-size: 0.88rem;
+  color: #aaa;
+  padding-top: 6px;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .page-header {
+    padding-left: 56px;
+  }
+}

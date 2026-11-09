@@ -11,6 +11,10 @@ import CreerEmploye from "./pages/Creeremploye";
 import ModifierEmploye from "./pages/ModifierEmploye";
 import ImporterEmployes from "./pages/ImporterEmployes";
 import PointageDemo from "./pages/PointageDemo";
+import Dashboard from "./pages/Dashboard";
+import Assiduite from "./pages/Assiduite";
+
+
 // v1.1 — authentification JWT : toutes les routes employés sont désormais
 // protégées (redirection vers /login si pas de token). Le pointage par
 // reconnaissance faciale et les autres modules RH arrivent dans les
@@ -28,7 +32,8 @@ function App() {
           <Route path="/employes/import" element={<PrivateRoute><ImporterEmployes /></PrivateRoute>} />
           <Route path="/employes/:id" element={<PrivateRoute><EmployeDetail /></PrivateRoute>} />
           <Route path="/employes/:id/modifier" element={<PrivateRoute><ModifierEmploye /></PrivateRoute>} />
-
+          <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+          <Route path="/assiduite" element={<PrivateRoute><Assiduite /></PrivateRoute>} />
           <Route path="*" element={<div>Page non trouvée</div>} />
         </Routes>
       </Router>

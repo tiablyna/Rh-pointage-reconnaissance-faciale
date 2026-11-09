@@ -14,11 +14,9 @@
 // l'étape "encodage" puis remonté sans flux → videoWidth = 0 → toBlob()
 // renvoyait null → FormData.append(null) levait l'erreur.
 import { useState, useRef, useEffect, useCallback } from "react";
-import axios from "axios";
 import { FaCamera, FaCheck, FaArrowRight, FaRedo } from "react-icons/fa";
-import { serviceDemoPointage } from "../services/api";
+import { serviceDemoPointage, serviceReconnaissance } from "../services/api";
 
-const PYTHON_URL = process.env.REACT_APP_PYTHON_URL || "http://localhost:5001";
 const NB_PHOTOS_INSCRIPTION = 3;
 const ETAPES_AVEC_CAMERA = ["inscription", "pret", "pointage_en_cours"];
 
@@ -96,7 +94,7 @@ export default function PointageDemo() {
     let timer = null;
     const verifier = async () => {
       try {
-        const { data } = await axios.get(`${PYTHON_URL}/health`);
+        const { data } = await serviceReconnaissance.verifierSante();
         if (annule) return;
         if (data.modele_charge) {
           setEtape("inscription");
@@ -179,7 +177,7 @@ export default function PointageDemo() {
       for (let i = 0; i < photosCapturees.length; i++) {
         const fd = new FormData();
         fd.append("photo", photosCapturees[i], `photo${i}.jpg`);
-        const { data } = await axios.post(`${PYTHON_URL}/encoder`, fd);
+        const { data } = await serviceReconnaissance.encoder(fd);
         encodages.push({ photo_source: creation.photos[i], encodage: data.embedding });
       }
 
@@ -211,7 +209,7 @@ export default function PointageDemo() {
       const fd = new FormData();
       fd.append("photo", blob, "pointage.jpg");
       fd.append("type", "entree");
-      const { data } = await axios.post(`${PYTHON_URL}/reconnaitre`, fd);
+      const { data } = await serviceReconnaissance.reconnaitre(fd);
       setResultatPointage(data);
       setEtape("resultat");
     } catch (e) {

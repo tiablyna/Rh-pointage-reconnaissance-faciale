@@ -49,7 +49,7 @@ function Login() {
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
 
-      navigate("/employes");
+      navigate("/dashboard");
     } catch (err) {
       console.error("Erreur login:", err);
       const status = err.response?.status;

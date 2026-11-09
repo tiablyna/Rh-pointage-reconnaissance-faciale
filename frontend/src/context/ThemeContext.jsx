@@ -6,8 +6,7 @@
 // couleur et l'appliquer immédiatement via des variables CSS sur :root.
 // ─────────────────────────────────────────────────────────────────────────────
 import { createContext, useContext, useState, useEffect, useCallback } from "react";
-import axios from "axios";
-
+import {appearanceService} from "../services/api";
 const API_BASE = `${process.env.REACT_APP_API_URL}/api/apparence`;
 
 // ── Palettes prédéfinies ──────────────────────────────────────────────────────
@@ -75,8 +74,8 @@ export function ThemeProvider({ children }) {
     // Pré-application immédiate pour éviter le flash orange→autre couleur
     appliquerCss(COULEUR_DEFAUT);
 
-    axios.get(`${API_BASE}/settings`)
-      .then(({ data }) => {
+    appearanceService.getSettings()
+    .then(({ data }) => {
         const c = data.couleurPrincipale || COULEUR_DEFAUT;
         setCouleur(c);
         appliquerCss(c);
